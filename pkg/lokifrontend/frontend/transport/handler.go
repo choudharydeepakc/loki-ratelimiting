@@ -156,9 +156,6 @@ func NewHandlerWithRateLimit(cfg HandlerConfig, roundTripper http.RoundTripper, 
 	return h
 }
 
-// DKADDED : this is authz config, we need to harden this
-// there is no lock while loading the config and also make sure server doesnt start before config is loaded
-
 type AuthZConfigEntry struct {
 	Tenants      []string `json:"tenants"`
 	SerialNumber []string `json:"serialNumber"`
@@ -260,7 +257,6 @@ func GetConfig(serialNumber string) ([]string, bool) {
 	return serialNumbers, exists
 }
 
-// DKADDED : this is authz config, we need to harden this
 
 func (f *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Apply rate limiting if configured
